@@ -1,10 +1,16 @@
+// Getting Elements-//
+// body
 var body = document.getElementById("body");
-
 // three buttons on top of page
 var todoButton = document.getElementById("to-do-button");
 var doingButton = document.getElementById("doing-button");
 var doneButton = document.getElementById("done-button");
+// Space for task cards on each page
+var todoCardSpace = document.getElementById("todoCardSpace");
+var doingCardSpace = document.getElementById("doingCardSpace");
+var doneCardSpace = document.getElementById("doneCardSpace");
 
+//Code to maintain horizonatal swiping //
 // three sections of page
 var sections = ["todo", "doing", "done"];
 var currentSectionIndex = 0;
@@ -40,6 +46,7 @@ bodyListener.on("swipeleft swiperight", function(ev) {
     showCurrentSection();
 });
 
+//Button events to change sections //
 // Add click event listeners to the buttons
 todoButton.addEventListener("click", function() {
     setCurrentSectionIndex(0);
@@ -73,6 +80,26 @@ function setCurrentSectionIndex(index) {
     currentSectionIndex = index;
 }
 
+// sample task from db
+var task = {
+    status: "todo",
+    taskId: 1,
+    title: "college work",
+    description: "complete the assignment and submit it on time",
+    date: "2020-10-10",
+    priority: "red"        // high-red, medium-orange, low-yello
+}
+
+let data = task;
+
+// Code for showing tasks from DB //
+function TaskCard(data) {
+ var res =`<div class="bg-dark-${data.priority} p-4 rounded-lg shadow mb-4">
+ <h3 class="font-bold">${data.title}</h3>
+ <p>${data.description}</p>
+</div>
+</div>`
+}
 
 
  // opening the form
