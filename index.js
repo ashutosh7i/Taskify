@@ -6,85 +6,73 @@ var doingButton = document.getElementById("doing-button");
 var doneButton = document.getElementById("done-button");
 
 // three sections of page
-var todo = document.getElementById("todo");
-var doing = document.getElementById("doing");
-var done = document.getElementById("done");
+var sections = ["todo", "doing", "done"];
+var currentSectionIndex = 0;
 
 //hiding sections by default
-todo.style.display = "block";
-doing.style.display = "none";
-done.style.display = "none";
+hideAllSections();
+showCurrentSection();
 
 // create a simple instance
 // by default, it only adds horizontal recognizers
 var bodyListener = new Hammer(body);
 
-var currentSection = "todo";
-
-// the first screen is todo so show todo section
-// then if user slides right, show doing section
-// then if user slides right, show done section
-// then if user slides left, show doing section
-// then if user slides left, show todo section
-
-bodyListener.on("panleft panright", function(ev) {
-    if (ev.type === "panleft") {
-        if (currentSection === "todo") {
-            currentSection = "doing";
-        } else if (currentSection === "doing") {
-            currentSection = "done";
+bodyListener.on("swipeleft swiperight", function(ev) {
+    if (ev.type === "swipeleft") {
+        if (currentSectionIndex === 2) {
+            return;
         }
-    } else if (ev.type === "panright") {
-        if (currentSection === "done") {
-            currentSection = "doing";
-        } else if (currentSection === "doing") {
-            currentSection = "todo";
+        else {
+        currentSectionIndex = (currentSectionIndex + 1) % sections.length;
+        console.log("swipeleft", currentSectionIndex)
+        }
+    } else if (ev.type === "swiperight") {
+        if (currentSectionIndex === 0) {
+            return;
+        }
+        else {
+        currentSectionIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
+        console.log("swiperight", currentSectionIndex)
         }
     }
 
-    // Hide all sections
-    todo.style.display = "none";
-    doing.style.display = "none";
-    done.style.display = "none";
-
-    // Show current section with a sliding effect
-    document.getElementById(currentSection).style.display = "block";
-    document.getElementById(currentSection).style.transition = "display 2s";
+    hideAllSections();
+    showCurrentSection();
 });
 
 // Add click event listeners to the buttons
 todoButton.addEventListener("click", function() {
-    // Hide all sections
-    todo.style.display = "none";
-    doing.style.display = "none";
-    done.style.display = "none";
-
-    // Show todo section
-    todo.style.display = "block";
-    currentSection = "todo";
+    setCurrentSectionIndex(0);
+    hideAllSections();
+    showCurrentSection();
 });
 
 doingButton.addEventListener("click", function() {
-    // Hide all sections
-    todo.style.display = "none";
-    doing.style.display = "none";
-    done.style.display = "none";
-
-    // Show doing section
-    doing.style.display = "block";
-    currentSection = "doing";
+    setCurrentSectionIndex(1);
+    hideAllSections();
+    showCurrentSection();
 });
 
 doneButton.addEventListener("click", function() {
-    // Hide all sections
-    todo.style.display = "none";
-    doing.style.display = "none";
-    done.style.display = "none";
-
-    // Show done section
-    done.style.display = "block";
-    currentSection = "done";
+    setCurrentSectionIndex(2);
+    hideAllSections();
+    showCurrentSection();
 });
+
+function hideAllSections() {
+    sections.forEach(function(section) {
+        document.getElementById(section).style.display = "none";
+    });
+}
+
+function showCurrentSection() {
+    document.getElementById(sections[currentSectionIndex]).style.display = "block";
+}
+
+function setCurrentSectionIndex(index) {
+    currentSectionIndex = index;
+}
+
 
 
  // opening the form
