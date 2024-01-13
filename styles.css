@@ -16,3 +16,16 @@
   text-align: center;
   font: 30px/300px Helvetica, Arial, sans-serif;
 } */
+
+footer {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+ 
+}
+.expanded {
+  height: 505px;
+
+}
+/* Adjusted top position to cover content above */
+

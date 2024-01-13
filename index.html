@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="styles.css">
 
 </head>
-<body id="body" class="h-full">
-    <div id="container" class="min-h-dvh flex flex-col  ">
-      <header class="h-12 p-2 border-b-2 border-border-color bg-border-color flex justify-between items-center "> 
+<body id="body" class="h-dvh w-full box-border ">
+    <div id="container" class="min-h-full flex flex-col  ">
+      <header class="h-12 p-2 border-b- border-border-color bg-border-color flex justify-between items-center "> 
          <div class="">
               <button id="nav-btn" class="h-8 w-8 rounded-full bg-logo-color  ">
                 <img src="assets/navigation-bar.png" class=" h-6 w-6  m-auto">
@@ -23,11 +23,11 @@
          </div>
     </header>
     
-    <header class="h-12 p-2 border-b-2 border-border-color bg-border-color rounded-2xl m-1">
+    <header class="h-10 p-2 border-b-2 border-border-color bg-border-color rounded-2xl m-2">
          <div class="flex justify-between items-center ">
-            <div id="to-do-button" class="ml-3">To-do</div>
-            <div id="doing-button">Doing</div>
-            <div id="done-button" class="mr-3"> Done</div>
+            <div id="to-do-button" class="text-xl ml-3 font-bold ">To-do</div>
+            <div id="doing-button" class="text-xl font-bold">Doing</div>
+            <div id="done-button" class=" text-xl mr-3 font-bold "> Done</div>
          </div>
     </header>
 
@@ -67,8 +67,8 @@
     </div>
 
   </div>
-  <footer class="h-12 p-2 bg-logo-color rounded-2xl text-center ">
-    <button class=""> Add a Task ➕ </button>
+  <footer class="footer expanded h-12 p-2 bg-logo-color rounded-2xl text-center m-auto absolute ">
+    <button id="add-task" class="text-xl font-bold "> Add a Task ➕ </button>
   </footer>
     
 </body>

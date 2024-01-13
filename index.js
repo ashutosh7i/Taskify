@@ -85,3 +85,14 @@ doneButton.addEventListener("click", function() {
     done.style.display = "block";
     currentSection = "done";
 });
+
+
+ // opening the form
+ const footer = document.querySelector('.footer')
+ const taskButton = document.getElementById("add-task")
+
+ const openForm = () => {
+    footer.classList.toggle('expanded')
+}
+
+ taskButton.addEventListener('click' , openForm)
