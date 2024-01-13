@@ -93,6 +93,14 @@ doneButton.addEventListener("click", function() {
 
  const openForm = () => {
     footer.classList.toggle('expanded')
+    footer.innerHTML = `<form id="adding-task" class="p-5">
+    <div>
+      <input type="text" class="w-full  text-center rounded-2xl px-2 text-2xl p-4 bg-logo-color text-white font-bold "
+       placeholder="What do you need to do?" >
+    </div>
+    <div></div>
+  </form>`
+    
 }
 
  taskButton.addEventListener('click' , openForm)
