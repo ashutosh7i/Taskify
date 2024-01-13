@@ -96,7 +96,7 @@ var tasks = [
         title: "Prepare Presentation",
         description: "Create a compelling presentation for the upcoming meeting.",
         date: "2022-02-20",
-        priority: "orange"
+        priority: "white"
     },
     {
         status: "todo",
@@ -120,7 +120,7 @@ var tasks = [
         title: "Debugging Session",
         description: "Collaborate with the team to debug and fix reported issues.",
         date: "2022-03-05",
-        priority: "orange"
+        priority: "white"
     }
 ];
 
@@ -135,9 +135,18 @@ tasks.forEach(function(task) {
         doneCardSpace.innerHTML += taskCard;
     }
 });
-
 function TaskCard(data) {
-    return `<div class="bg-${data.priority} p-4 rounded-lg shadow mb-4">
+    // Map priority values to custom background colors
+    const priorityColors = {
+        "red": "#FF5757",
+        "white": "#FFFFFF",
+        "yellow": "#FFE766",
+    };
+
+    // Use a fallback color if priority is not in the map
+    const priorityColor = priorityColors[data.priority] || "#000000";
+
+    return `<div style="background-color: ${priorityColor}" class="p-4 rounded-lg shadow mb-4">
                 <span id="title" class="font-bold text-xl ">${data.title}</span>
                 <span id="date" class=" ml-1 text-xs">${data.date}</span>
                 <span id="task-num" class="ml-48 font-bold">${data.taskId}</span>
@@ -156,14 +165,43 @@ function TaskCard(data) {
     footer.classList.toggle('expanded')
     footer.innerHTML = `<form id="adding-task" class="p-5 gap-4 flex flex-col">
     <div>
-      <input type="text" class="w-full  text-center rounded-2xl px-2 text-2xl p-4 bg-logo-color text-white font-bold "
-       placeholder="What do you need to do?" >
+        <label for="task-title" class="text-white font-bold">Title:</label>
+        <input type="text" id="task-title" class="w-full text-center rounded-2xl px-2 text-2xl p-4 bg-logo-color text-white font-bold" placeholder="What do you need to do?">
     </div>
-    <hr class= "">
-    <div class="check-boxes">
-    <input type="checkbox" value="high-priority">
+    <div>
+        <label for="task-description" class="text-white font-bold">Description:</label>
+        <textarea id="task-description" class="w-full text-center rounded-2xl px-2 text-2xl p-4 bg-logo-color text-white font-bold" placeholder="Provide a description"></textarea>
     </div>
-  </form>`
+    <hr class="">
+    <div>
+        <label for="task-date" class="text-white font-bold">Date:</label>
+        <input type="date" id="task-date" class="w-full text-center rounded-2xl px-2 text-2xl p-4 bg-logo-color text-white font-bold">select a date</input>
+    </div>
+    <hr class="">
+    <div>
+    <label class="text-white font-bold">Priority:</label>
+    <div class="flex justify-between">
+        <div>
+            <input type="radio" id="no-priority" name="priority" value="no-priority">
+            <label for="no-priority" class="text-white">No Priority</label>
+        </div>
+        <div>
+            <input type="radio" id="medium-priority" name="priority" value="medium-priority" checked>
+            <label for="medium-priority" class="text-white">Medium Priority</label>
+        </div>
+        <div>
+            <input type="radio" id="high-priority" name="priority" value="high-priority">
+            <label for="high-priority" class="text-white">High Priority</label>
+        </div>
+        </div>
+    </div>
+    <hr class="">
+    <div class="flex justify-between">
+        <button type="button" id="discard-task" class="bg-red text-white px-4 py-2 rounded-full">Discard</button>
+        <button type="submit" id="save-task" class="bg-white text-blue px-4 py-2 rounded-full">Save</button>
+    </div>
+</form>
+`
     
 }
 
