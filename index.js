@@ -91,6 +91,9 @@ doneButton.addEventListener("click", function() {
  const footer = document.querySelector('.footer')
  const taskButton = document.getElementById("add-task")
 
+ // collaps add task by default
+ footer.classList.remove('expanded');
+ // Toggle on click
  const openForm = () => {
     footer.classList.toggle('expanded')
     footer.innerHTML = `<form id="adding-task" class="p-5">
