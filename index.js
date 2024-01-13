@@ -101,6 +101,7 @@ doneButton.addEventListener("click", function() {
       <input type="text" class="w-full  text-center rounded-2xl px-2 text-2xl p-4 bg-logo-color text-white font-bold "
        placeholder="What do you need to do?" >
     </div>
+    <hr class= "">
     <div></div>
   </form>`
     
