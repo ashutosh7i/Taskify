@@ -80,27 +80,70 @@ function setCurrentSectionIndex(index) {
     currentSectionIndex = index;
 }
 
-// sample task from db
-var task = {
-    status: "todo",
-    taskId: 1,
-    title: "college work",
-    description: "complete the assignment and submit it on time",
-    date: "2020-10-10",
-    priority: "red"        // high-red, medium-orange, low-yello
-}
+//some static tasks
+var tasks = [
+    {
+        status: "todo",
+        taskId: 1,
+        title: "Complete Project Proposal",
+        description: "Draft and submit the project proposal for review.",
+        date: "2022-02-15",
+        priority: "red"
+    },
+    {
+        status: "doing",
+        taskId: 2,
+        title: "Prepare Presentation",
+        description: "Create a compelling presentation for the upcoming meeting.",
+        date: "2022-02-20",
+        priority: "orange"
+    },
+    {
+        status: "todo",
+        taskId: 3,
+        title: "Review Code Changes",
+        description: "Review and provide feedback on recent code changes.",
+        date: "2022-02-25",
+        priority: "yellow"
+    },
+    {
+        status: "done",
+        taskId: 4,
+        title: "Meeting with Client",
+        description: "Conduct a virtual meeting with the client to discuss project updates.",
+        date: "2022-03-01",
+        priority: "red"
+    },
+    {
+        status: "doing",
+        taskId: 5,
+        title: "Debugging Session",
+        description: "Collaborate with the team to debug and fix reported issues.",
+        date: "2022-03-05",
+        priority: "orange"
+    }
+];
 
-let data = task;
+// Display tasks in specific sections based on their status
+tasks.forEach(function(task) {
+    var taskCard = TaskCard(task);
+    if (task.status === "todo") {
+        todoCardSpace.innerHTML += taskCard;
+    } else if (task.status === "doing") {
+        doingCardSpace.innerHTML += taskCard;
+    } else if (task.status === "done") {
+        doneCardSpace.innerHTML += taskCard;
+    }
+});
 
-// Code for showing tasks from DB //
 function TaskCard(data) {
- var res =`<div class="bg-dark-${data.priority} p-4 rounded-lg shadow mb-4">
- <h3 class="font-bold">${data.title}</h3>
- <p>${data.description}</p>
-</div>
-</div>`
+    return `<div class="bg-${data.priority} p-4 rounded-lg shadow mb-4">
+                <span id="title" class="font-bold text-xl ">${data.title}</span>
+                <span id="date" class=" ml-1 text-xs">${data.date}</span>
+                <span id="task-num" class="ml-48 font-bold">${data.taskId}</span>
+                <p>${data.description}</p>
+            </div>`;
 }
-
 
  // opening the form
  const footer = document.querySelector('.footer')
