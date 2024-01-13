@@ -3,20 +3,6 @@
 @tailwind utilities;
 
 
-/* body {
-  margin: 0;
-  padding: 0;
-} */
-
-/* // some style for hammerjs bg
-#myElement {
-  background: silver;
-  height: 100vh;
-  width: 100vw;
-  text-align: center;
-  font: 30px/300px Helvetica, Arial, sans-serif;
-} */
-
 footer {
   bottom: 0;
   left: 0;
@@ -27,5 +13,4 @@ footer {
   height: 478px;
 
 }
-/* Adjusted top position to cover content above */
 
