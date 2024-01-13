@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskify</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body id="body" class="h-full">
+    <div id="container" class="min-h-dvh flex flex-col  ">
+      <header class="h-12 p-2 border-b-2 border-border-color bg-border-color flex justify-between items-center "> 
+         <div class="">
+              <button id="nav-btn" class="h-8 w-8 rounded-full bg-logo-color  ">
+                <img src="assets/navigation-bar.png" class=" h-6 w-6  m-auto">
+              </button>
+          </div>
+          <div>
+              <img src="assets/logo.jpg" class="h-8">
+          </div>
+          <div>
+              <button id="journal-btn" class="rounded-full p-1 bg-logo-color hover:bg-blue-800">➕</button>
+         </div>
+    </header>
+    
+    <header class="h-12 p-2 border-b-2 border-border-color bg-border-color rounded-2xl m-1">
+         <div class="flex justify-between items-center ">
+            <div id="to-do-button" class="ml-3">To-do</div>
+            <div id="doing-button">Doing</div>
+            <div id="done-button" class="mr-3"> Done</div>
+         </div>
+    </header>
+
+    <div id="todo" class="bg-blue-100 p-4 rounded-lg">
+      <!-- make to do design here -->
+      <h2 class="text-2xl font-bold mb-4">To Do</h2>
+      <div class="bg-white p-4 rounded-lg shadow mb-4">
+        <h3 id="no-priority" class="font-bold">Task 1</h3>
+        <p>Description for Task 1 / no priority</p>
+      </div>
+      <div id="high-priority" class=" p-4 rounded-lg shadow mb-4 bg-red">
+        <h3 class="font-bold">Task 2</h3>
+        <p>high-priority task / descriptionk</p>
+      </div>
+      <div id="low-priorty" class= " p-4 rounded-lg shadow mb-4 bg-yellow">
+        <h3 class="font-bold">Task 3</h3>
+        <p>low-priorty task</p>
+      </div>
+    </div>
+
+    <div id="doing" class="bg-yellow-100 p-4 rounded-lg">
+      <!-- make doing design here -->
+      <h2 class="text-2xl font-bold mb-4">Doing</h2>
+      <div class= "bg-gradient-to-l from-white to-green p-4 rounded-lg shadow mb-4 ">
+        <h3 class="font-bold">Task 2</h3>
+        <p>Description for Task 2</p>
+      </div>
+    </div>
+
+    <div id="done" class="bg-green-100 p-4 rounded-lg">
+      <!-- make done design here -->
+      <h2 class="text-2xl font-bold mb-4">Done</h2>
+      <div class="bg-dark-green p-4 rounded-lg shadow mb-4">
+        <h3 class="font-bold">Task 3</h3>
+        <p>Description for Task 3</p>
+      </div>
+    </div>
+
+  </div>
+  <footer class="h-12 p-2 bg-logo-color rounded-2xl text-center ">
+    <button class=""> Add a Task ➕ </button>
+  </footer>
+    
+</body>
+<script src="https://hammerjs.github.io/dist/hammer.js"></script>
+<script src="index.js"></script>
+</html>
