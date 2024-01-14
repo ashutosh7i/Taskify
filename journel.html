@@ -54,8 +54,11 @@
 
             // Retrieve journals from localStorage on page load
             const savedJournals = JSON.parse(localStorage.getItem("journals")) || [];
-            savedJournals.forEach((content) => {
-                saveJournal(content);
+            let idCounter = savedJournals.length + 1;
+
+            // Load existing journals from localStorage
+            savedJournals.forEach(journal => {
+                renderJournal(journal);
             });
 
             addJournalBtn.addEventListener("click", function () {
@@ -73,7 +76,8 @@
                 e.preventDefault();
                 const content = journalContent.value.trim();
                 if (content !== "") {
-                    saveJournal(content);
+                    const id = idCounter++;
+                    saveJournal({ id, content });
                     resetForm();
                     journalModal.style.display = "none";
                     overlay.style.display = "none";
@@ -82,29 +86,38 @@
                 }
             });
 
-            function saveJournal(content) {
+            function saveJournal({ id, content }) {
+                const today = new Date().toLocaleDateString();
+                const journalCard = renderJournal({ id, content, date: today });
+                journalCards.appendChild(journalCard);
+
+                // Save the journal as an object to localStorage
+                savedJournals.push({ id, content, date: today });
+                localStorage.setItem("journals", JSON.stringify(savedJournals));
+            }
+
+            function renderJournal({ id, content, date }) {
                 const journalCard = document.createElement("div");
+                journalCard.id = `journal-${id}`;
                 journalCard.className = "bg-white p-4 rounded-md shadow-md";
                 journalCard.innerHTML = `
                     <p>${content}</p>
+                    <p class="text-sm text-gray-500">ID: ${id} | Date: ${date}</p>
                     <div class="flex mt-2">
-                        <button class="text-blue-500 mr-2" onclick="editJournal(this)">Edit</button>
-                        <button class="text-red-500" onclick="deleteJournal(this)">Delete</button>
+                        <button class="text-blue-500 mr-2" onclick="editJournal(${id})">Edit</button>
+                        <button class="text-red-500" onclick="deleteJournal(${id})">Delete</button>
                     </div>
                 `;
                 journalCards.appendChild(journalCard);
-
-                // Save the journal to localStorage
-                savedJournals.push(content);
-                localStorage.setItem("journals", JSON.stringify([...new Set(savedJournals)]));
+                return journalCard;
             }
 
             function resetForm() {
                 journalContent.value = "";
             }
 
-            window.editJournal = function (button) {
-                const journalCard = button.closest(".rounded-md");
+            window.editJournal = function (id) {
+                const journalCard = document.getElementById(`journal-${id}`);
                 const currentContent = journalCard.querySelector("p").innerText;
                 journalContent.value = currentContent;
 
@@ -116,19 +129,15 @@
                 overlay.style.display = "block";
             }
 
-            window.deleteJournal = function (button) {
-                const journalCard = button.closest(".rounded-md");
-                const currentContent = journalCard.querySelector("p").innerText;
+            window.deleteJournal = function (id) {
+                const journalCard = document.getElementById(`journal-${id}`);
 
                 // Delete the journal card
                 journalCard.remove();
 
                 // Remove the journal from localStorage
-                const index = savedJournals.indexOf(currentContent);
-                if (index !== -1) {
-                    savedJournals.splice(index, 1);
-                    localStorage.setItem("journals", JSON.stringify(savedJournals));
-                }
+                const updatedJournals = savedJournals.filter(journal => journal.id !== id);
+                localStorage.setItem("journals", JSON.stringify(updatedJournals));
             }
         });
     </script>
