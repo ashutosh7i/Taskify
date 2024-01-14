@@ -1,4 +1,4 @@
-# Taskify📓⏳
+# Taskify📓⏳    [![Azure Static Web Apps CI/CD](https://github.com/ashutosh7i/Taskify/actions/workflows/azure-static-web-apps-ambitious-pebble-058511710.yml/badge.svg)](https://github.com/ashutosh7i/Taskify/actions/workflows/azure-static-web-apps-ambitious-pebble-058511710.yml)
 
 "Effortless Productivity, Seamless Journaling - Simplify Your Day with Taskify". Taskify is a mobile-friendly web application designed for simple and efficient task management and journaling.
 
