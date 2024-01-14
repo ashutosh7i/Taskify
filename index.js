@@ -377,11 +377,11 @@ document.addEventListener("DOMContentLoaded", function () {
         
          // Update modal content with the random quote
          document.getElementById("quoteModalContent").innerHTML = `
-            <div>
-             <h2 class="text-2xl font-bold mb-4">Quote of the Day</h2>
-             <p class="text-lg mb-4">${randomQuote.text}</p>
-             <p class="text-sm">${randomQuote.author}</p>
-             <button id="hideModalBtn" class="bg-blue text-white py-2 px-4 rounded">Continue</button>
+            <div class="flex flex-col text-center" >
+             <h2 class="text-2xl font-bold mb-4 text-center ">Quote of the Day</h2>
+             <p class="text-lg "> ${randomQuote.text}</p>
+             <p class="text-sm mb-2"> ${randomQuote.author}</p>
+             <button id="hideModalBtn" class="bg-blue  text-white font-extrabold py-2 px-4  rounded align-center">Continue</button>
              </div>
          `;
             // Show the modal on initial page load
