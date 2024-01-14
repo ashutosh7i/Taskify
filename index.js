@@ -163,6 +163,7 @@ function TaskCard(data) {
                 <span id="task-num" class="ml-48 font-bold">${data.taskId}</span>
                 <p>${data.description}</p>
                 <button onclick="deleteTask(${data.taskId})" class="text-white px-4 py-2 rounded-full">🗑️</button>
+                <button onclick="moveTask(${data.taskId})" class="text-white px-4 py-2 rounded-full">👉</button>
             </div>`;
 }
 
@@ -287,6 +288,26 @@ function saveNewTask(newTask) {
 //     saveTasksToLocalStorage(tasks);
 //     return tasks;
 // }
+
+// Function to move a task to the next status
+function moveTask(taskId) {
+    let tasks = getTasksFromLocalStorage();
+    const taskToMove = tasks.find(task => task.taskId === taskId);
+    const taskIndex = tasks.indexOf(taskToMove);
+
+    // Move the task to the next status
+    const statuses = ["todo", "doing", "done"];
+    const nextStatusIndex = (statuses.indexOf(taskToMove.status) + 1) % statuses.length;
+    taskToMove.status = statuses[nextStatusIndex];
+
+    // Update the task in the array
+    tasks[taskIndex] = taskToMove;
+    saveTasksToLocalStorage(tasks);
+
+    // Refresh the page to update
+    location.reload();
+    return tasks;
+}
 
 // Function to delete a task
 function deleteTask(taskId) {
