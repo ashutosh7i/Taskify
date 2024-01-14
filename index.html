@@ -9,31 +9,32 @@
 </head>
 <body id="body" class="h-dvh w-full box-border ">
     <div id="container" class="min-h-full flex flex-col  ">
-      <header class="h-12 p-2 border-b- border-border-color bg-border-color flex justify-between items-center "> 
+      <header class="h-14 p-2 border-b- border-border-color  flex justify-between items-center "> 
          <div class="">
-              <button id="nav-btn" class="h-8 w-8 rounded-full bg-logo-color  ">
+              <button id="nav-btn" class="h-8 w-8 pb-8 pt-2 rounded-full bg-logo-color  ">
                 <img src="assets/navigation-bar.png" class=" h-6 w-6  m-auto">
               </button>
           </div>
           <div>
-              <img src="assets/logo.jpg" class="h-8">
+              <img src="assets/logo.jpg" class="h-10">
           </div>
           <div>
-              <button onclick="location.href = '/journel.html';" id="journal-btn" class="rounded-full p-1 bg-logo-color hover:bg-blue-800">➕</button>
+              <button onclick="location.href = '/journel.html';" id="journal-btn" class="rounded-full pb-10 bg-logo-color hover:bg-blue-800 w-8 h-8 font-extrabold text-3xl ">+</button>
          </div>
     </header>
     
-    <header class="h-10 p-2 border-b-2 border-border-color bg-border-color rounded-2xl m-2 shadow mb-4 ">
+    <header class="h-10 p-2 border-b-2 border-border-color bg-border-color rounded-2xl m-2 shadow-2xl mb-4 ">
          <div class="flex justify-between items-center ">
-            <div id="to-do-button" class="text-xl ml-3 font-bold ">To-do</div>
-            <div id="doing-button" class="text-xl font-bold">Doing</div>
-            <div id="done-button" class=" text-xl mr-3 font-bold "> Done</div>
+            <div id="to-do-button" class="text-xl ml-3 font-extrabold ">To-do</div>
+            <div id="doing-button" class="text-xl font-extrabold">Doing</div>
+            <div id="done-button" class=" text-xl mr-3 font-extrabold "> Done</div>
          </div>
     </header>
 
-    <div id="todo" class="bg-blue-100 p-4 rounded-lg">
+    <div id="todo" class="bg-blue-100 p-4 rounded-lg ">
       <!-- make to do design here -->
       <h2 id="todoCardSpace" class="text-2xl font-bold mb-4">To Do</h2>
+      
       <!-- Todo's render here from db -->
     </div>
 
@@ -51,7 +52,7 @@
 
   </div>
   <footer class="footer  h-12 p-2 bg-logo-color rounded-2xl text-center m-auto absolute ">
-    <button id="add-task" class="text-xl font-bold "> Add a Task <span class="text-2xl">+ </span></button>
+    <button id="add-task" class="text-xl font-extrabold "> Add a Task <span class="text-2xl">+ </span></button>
    
   </footer>
     

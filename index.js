@@ -157,15 +157,19 @@ function TaskCard(data) {
     // Use a fallback color if priority is not in the map
     const priorityColor = priorityColors[data.priority] || "#000000";
 
-    return `<div style="background-color: ${priorityColor}" class="p-4 rounded-lg shadow mb-4">
-                <span id="title" class="font-bold text-xl ">${data.title}</span>
+    return `<div style="background-color: ${priorityColor}" class="p-4 rounded-lg shadow mb-4 grid taskb">
+       <div>       
+    <span id="title" class="font-bold text-2xl ">${data.title}</span>
                 <span id="date" class=" ml-1 text-xs">${data.date}</span>
+                </div>
                 <span id="task-num" class="ml-48 font-bold">${data.taskId}</span>
-                <p>${data.description}</p>
-                <button onclick="deleteTask(${data.taskId})" class="text-white px-4 py-2 rounded-full">🗑️</button>
-                <button onclick="moveTask(${data.taskId})" class="text-white px-4 py-2 rounded-full">👉</button>
+                <p id="description" class=" font-normal text-lg ">${data.description}</p>
+                <div class="buttons flex gap-4 h-6 mt-2">
+                <button onclick="deleteTask(${data.taskId})" class="text-white px-2 py-1 rounded-lg  bg-black text-xs ">Doing</button>
+                <button onclick="moveTask(${data.taskId})" class="text-white px-2 py-1 rounded-lg  bg-black text-xs">Done</button>
+                </div>
             </div>`;
-}
+} 
 
 displayTasksFromLocalStorage();
 

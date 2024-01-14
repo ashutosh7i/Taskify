@@ -15,3 +15,29 @@ footer {
 
 }
 
+.taskb {
+  grid-template-areas: "title date num"
+  "describ describ describ"
+  "button button button";
+
+}
+
+#title {
+  grid-area: title;
+}
+#task-num {
+  grid-area: num;
+  justify-self: end;
+}
+#date {
+  grid-area: date;
+  place-self:center start ;
+}
+
+#description {
+  grid-area: describ;
+}
+
+.buttons {
+  grid-area: button;
+}
