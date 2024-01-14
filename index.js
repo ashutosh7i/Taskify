@@ -387,6 +387,8 @@ document.addEventListener("DOMContentLoaded", function () {
             // Show the modal on initial page load
             document.getElementById("quoteModal").classList.remove("hidden");
 
+                localStorage.setItem('isFirstLoad', 'false');
+
             // Hide the modal when clicking outside of it
             document.getElementById("quoteModal").addEventListener("click", function (event) {
                 if (event.target === this) {
