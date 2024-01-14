@@ -21,6 +21,48 @@ var currentSectionIndex = 0;
 hideAllSections();
 showCurrentSection();
 
+//dynamic content
+
+
+const dynamicContent = document.getElementById("dynamic-text");
+console.log(dynamicContent)
+const phrases = ["Hello..", "Tere.." , "Hola.." , "Namaste.." , "Shalom.."]
+
+let letterIndex = 0;
+let phraseIndex = 0;
+
+function printLetters(phrase){
+    if (letterIndex < phrase.length){
+        dynamicContent.textContent += phrase.charAt(letterIndex);
+        letterIndex += 1;
+        setTimeout(function(){
+            printLetters(phrase)}, 100)
+    }
+    else if(letterIndex== phrase.length){
+        clearletters()
+    }
+}
+function clearletters(){
+ if(letterIndex > -1)
+ { 
+    let updatedPhrase= "" ;
+    
+    for (let index = 0; index < letterIndex; index++) {
+        updatedPhrase += phrases[phraseIndex].charAt(index);
+      }
+    dynamicContent.textContent = updatedPhrase;
+    letterIndex -= 1;
+    setTimeout (clearletters , 100);
+    }
+  else if (letterIndex == -1)
+  { phraseIndex= (phraseIndex +1) % phrases.length;
+    letterIndex = 0;
+    printLetters(phrases[phraseIndex])
+}  
+
+}
+printLetters(phrases[phraseIndex])
+
 
 // create a simple instance
 // by default, it only adds horizontal recognizers
@@ -190,18 +232,18 @@ displayTasksFromLocalStorage();
         <label for="task-title" class="text-white font-bold text-xl ">Title:</label>
         <input type="text" id="task-title" class="w-full text-center shadow-2xl rounded-2xl px-2 text-2xl p-4 bg-logo-color  placeholder:text-white border border-white" placeholder="What do you need to do?">
     </div>
-    <br>
+    
     <div>
         <label for="task-description" class="text-white font-bold text-xl">Description:</label>
         <textarea id="task-description" class="placeholder:text-white text- w-full text-center shadow-2xl  rounded-2xl px-2 text-2xl  p-4 bg-logo-color text-white  border border-" placeholder="Provide a description..."></textarea>
     </div>
-    <br>
+    
     <!-- <hr class="text-white"> -->
     <div class="flex gap-3 justify-center flex-col" >
         <label for="task-date" class="text-white font-bold text-xl self-center">Date:</label>
         <input type="date" id="task-date" class="self-center w-full text-center rounded-2xl border border-white shadow-2xl px-2 text-2xl p-4 bg-logo-color text-white " placeholder="mm/dd/yyyy" ></input>
     </div>
-    <br>
+
     <hr class="text-white">
     
     <div>
