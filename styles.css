@@ -41,3 +41,10 @@ footer {
 .buttons {
   grid-area: button;
 }
+
+.expanded-nav {
+  background-color: #50829d ;
+  height: 100dvh;
+  width: 100vw;
+  
+}

@@ -4,7 +4,10 @@
 
 ## Features
 
-- **Todo List Management:** Easily add, update, and remove tasks. Keep track of your to-do items effortlessly.
+- **Sleek and Minimalistic Design:** Embrace a clutter-free and sleek interface in Taskify, providing users with a focused and distraction-free task management experience. The minimalistic design enhances visual clarity, ensuring an intuitive and efficient workflow.
+
+- **Touch-Responsive Interface:** Taskify utilizes Hammer.js for its touch-responsive features, elevating the user experience with a smoother and more precise touch interface. Hammer.js simplifies the implementation of touch gestures, making the interface highly intuitive and engaging. The library's versatility allows for easy customization of touch interactions, contributing to an overall improved and seamless user experience.
+
 
 - **Prioritization:** Categorize tasks based on priority levels. Organize your workload by assigning urgency and importance to each task.
 
@@ -25,7 +28,7 @@ Make sure you have Git installed on your machine. If not, you can download and i
    ```bash
    git clone https://github.com/ishadubey30/Taskify.git
 
-## Usage
+## How to open
 
 1. **Navigate to the Taskify directory:**
     ```bash
