@@ -178,45 +178,44 @@ displayTasksFromLocalStorage();
  // Toggle on click
  const openForm = () => {
     footer.classList.toggle('expanded')
-    footer.innerHTML = `<form id="adding-task" class="p-5 gap-4 flex flex-col">
+    footer.innerHTML = ` <form id="adding-task" class="p-5 gap-4 flex flex-col bg-logo-color">
     <div>
-        <label for="task-title" class="text-white font-bold">Title:</label>
-        <input type="text" id="task-title" class="w-full text-center rounded-2xl px-2 text-2xl p-4 bg-logo-color text-white font-bold" placeholder="What do you need to do?">
+        <label for="task-title" class="text-white font-bold text-xl ">Title:</label>
+        <input type="text" id="task-title" class="w-full text-center shadow-2xl rounded-2xl px-2 text-2xl p-4 bg-logo-color  placeholder:text-white border border-white" placeholder="What do you need to do?">
     </div>
     <div>
-        <label for="task-description" class="text-white font-bold">Description:</label>
-        <textarea id="task-description" class="w-full text-center rounded-2xl px-2 text-2xl p-4 bg-logo-color text-white font-bold" placeholder="Provide a description"></textarea>
+        <label for="task-description" class="text-white font-bold text-xl">Description:</label>
+        <textarea id="task-description" class="placeholder:text-white text- w-full text-center shadow-2xl  rounded-2xl px-2 text-2xl  p-4 bg-logo-color text-white  border border-" placeholder="Provide a description..."></textarea>
     </div>
-    <hr class="">
+    <!-- <hr class="text-white"> -->
     <div>
-        <label for="task-date" class="text-white font-bold">Date:</label>
-        <input type="date" id="task-date" class="w-full text-center rounded-2xl px-2 text-2xl p-4 bg-logo-color text-white font-bold">select a date</input>
+        <label for="task-date" class="text-white font-bold text-xl text-center">Date:</label>
+        <input type="date" id="task-date" class="w-full text-center rounded-2xl border border-white shadow-2xl px-2 text-2xl p-4 bg-logo-color text-white " placeholder="mm/dd/yyyy" ></input>
     </div>
-    <hr class="">
+    <hr class="text-white">
     <div>
-    <label class="text-white font-bold">Priority:</label>
+    <label class="text-white font-bold text-xl">Priority:</label>
     <div class="flex justify-between">
         <div>
             <input type="radio" id="no-priority" name="priority" value="white">
-            <label for="no-priority" class="text-white">No Priority</label>
+            <label for="no-priority" class="text-white font-extrabold">No Priority</label>
         </div>
         <div>
             <input type="radio" id="medium-priority" name="priority" value="yellow" checked>
-            <label for="medium-priority" class="text-white">Medium Priority</label>
+            <label for="medium-priority" class="text-white font-extrabold">Medium Priority</label>
         </div>
         <div>
             <input type="radio" id="high-priority" name="priority" value="red">
-            <label for="high-priority" class="text-white">High Priority</label>
+            <label for="high-priority" class="text-white font-extrabold">High Priority</label>
         </div>
         </div>
     </div>
-    <hr class="">
+    <!-- <hr class=""> -->
     <div class="flex justify-between">
-        <button onclick="discardForm()" type="button" id="discard-task" class="bg-red text-white px-4 py-2 rounded-full">Discard</button>
-        <button onclick="saveTask()" type="button" id="save-task" class="bg-white text-blue px-4 py-2 rounded-full">Save</button>
+        <button onclick="discardForm()" type="button" id="discard-task" class="bg-red font-bold px-4 py-2 rounded-full">Discard</button>
+        <button onclick="saveTask()" type="button" id="save-task" class="bg-white text-blue px-4 py-2 rounded-full font-bold  ">Save</button>
     </div>
 </form>
-<script>
 `    
 }
 
