@@ -1,6 +1,8 @@
 // Getting Elements-//
 // body
 var body = document.getElementById("body");
+
+
 // three buttons on top of page
 var todoButton = document.getElementById("to-do-button");
 var doingButton = document.getElementById("doing-button");
@@ -18,6 +20,7 @@ var currentSectionIndex = 0;
 //hiding sections by default
 hideAllSections();
 showCurrentSection();
+
 
 // create a simple instance
 // by default, it only adds horizontal recognizers
