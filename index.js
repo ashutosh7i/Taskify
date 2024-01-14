@@ -264,7 +264,8 @@ function saveTask() {
     clearFormData();
 
     // Close the form
-    footer.classList.remove('expanded');
+    //footer.classList.remove('expanded');
+    window.location.reload();
 }
 
  // Function to save tasks to local storage
@@ -338,7 +339,8 @@ function discardForm() {
     clearFormData();
 
     // Close the form
-    footer.classList.remove('expanded');
+    // footer.classList.remove('expanded');
+    window.location.reload();
 }
 
 // // 4. Update a specific task
