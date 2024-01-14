@@ -362,3 +362,38 @@ function discardForm() {
 
 // const tasksAfterUpdating = updateTask(taskToUpdate);
 // console.log('Tasks after updating:', tasksAfterUpdating);
+document.addEventListener("DOMContentLoaded", function () {
+    // Fetch quote from API
+    fetch('https://type.fit/api/quotes')
+        .then(response => response.json())
+        .then(data => {
+         // Choose a random quote from the response
+         const randomIndex = Math.floor(Math.random() * data.length);
+         const randomQuote = data[randomIndex];
+        
+         // Update modal content with the random quote
+         document.getElementById("quoteModalContent").innerHTML = `
+            <div>
+             <h2 class="text-2xl font-bold mb-4">Quote of the Day</h2>
+             <p class="text-lg mb-4">${randomQuote.text}</p>
+             <p class="text-sm">${randomQuote.author}</p>
+             <button id="hideModalBtn" class="bg-blue text-white py-2 px-4 rounded">Continue</button>
+             </div>
+         `;
+            // Show the modal on initial page load
+            document.getElementById("quoteModal").classList.remove("hidden");
+
+            // Hide the modal when clicking outside of it
+            document.getElementById("quoteModal").addEventListener("click", function (event) {
+                if (event.target === this) {
+                    this.classList.add("hidden");
+                }
+            });
+
+            // Hide the modal when clicking the hide button
+            document.getElementById("hideModalBtn").addEventListener("click", function () {
+                document.getElementById("quoteModal").classList.add("hidden");
+            });
+        })
+        .catch(error => console.error('Error fetching quote:', error));
+});
