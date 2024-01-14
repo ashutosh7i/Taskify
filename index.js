@@ -210,8 +210,8 @@ function TaskCard(data) {
                 <span id="task-num" class="ml-48 font-bold">${data.taskId}</span>
                 <p id="description" class=" font-normal text-lg ">${data.description}</p>
                 <div class="buttons flex gap-4 h-6 mt-2">
-                <button onclick="deleteTask(${data.taskId})" class="text-white px-2 py-1 rounded-lg  bg-black text-xs ">Doing</button>
-                <button onclick="moveTask(${data.taskId})" class="text-white px-2 py-1 rounded-lg  bg-black text-xs">Done</button>
+                <button onclick="deleteTask(${data.taskId})" class="text-white px-2 py-1 rounded-lg  bg-black text-xs ">Delete🗑️</button>
+                <button onclick="moveTask(${data.taskId})" class="text-white px-2 py-1 rounded-lg  bg-black text-xs">Progress➡️</button>
                 </div>
             </div>`;
 } 
