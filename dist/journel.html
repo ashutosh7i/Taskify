@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        .modal {
+            display: none;
+            z-index: 1;
+        }
+
+        .overlay {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray">
+
+    <div class="container mx-auto p-4 round">
+        <h1 class="text-4xl font-bold mb-4">My Journal</h1>
+
+        <button id="addJournalBtn" class="bg-blue font-bold shadow-lg border-black text-black p-2 rounded-md fixed bottom-8 right-8">Add
+            Journal</button>
+
+        <div id="journalModal" class="modal fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 shadow-md">
+            <h2 class="text-2xl font-bold mb-4">Add Journal</h2>
+            <form id="journalForm">
+                <textarea id="journalContent" class="w-full p-2 mb-4" placeholder="Write your journal..."></textarea>
+                <button type="button" id="saveJournalBtn"
+                    class="bg-blue-500 text-black bg-blue font-bold p-2 rounded-md mr-2">Save</button>
+                <button type="button" id="closeModalBtn" class="bg-blue  text-black font-bold p-2 rounded-md">Close</button>
+            </form>
+        </div>
+
+        <div id="overlay" class="overlay fixed top-0 left-0 w-full h-full bg-black opacity-50"></div>
+
+        <div id="journalCards" class="mt-8 space-y-4"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const addJournalBtn = document.getElementById("addJournalBtn");
+            const journalModal = document.getElementById("journalModal");
+            const overlay = document.getElementById("overlay");
+            const closeModalBtn = document.getElementById("closeModalBtn");
+            const saveJournalBtn = document.getElementById("saveJournalBtn");
+            const journalForm = document.getElementById("journalForm");
+            const journalContent = document.getElementById("journalContent");
+            const journalCards = document.getElementById("journalCards");
+
+            // Retrieve journals from localStorage on page load
+            const savedJournals = JSON.parse(localStorage.getItem("journals")) || [];
+            let idCounter = savedJournals.length + 1;
+
+            // Load existing journals from localStorage
+            savedJournals.forEach(journal => {
+                renderJournal(journal);
+            });
+
+            addJournalBtn.addEventListener("click", function () {
+                journalModal.style.display = "block";
+                overlay.style.display = "block";
+            });
+
+            closeModalBtn.addEventListener("click", function () {
+                journalModal.style.display = "none";
+                overlay.style.display = "none";
+                resetForm();
+            });
+
+            saveJournalBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                const content = journalContent.value.trim();
+                if (content !== "") {
+                    const id = idCounter++;
+                    saveJournal({ id, content });
+                    resetForm();
+                    journalModal.style.display = "none";
+                    overlay.style.display = "none";
+                } else {
+                    alert("Please enter journal content.");
+                }
+            });
+
+            function saveJournal({ id, content }) {
+                const today = new Date().toLocaleDateString();
+                const journalCard = renderJournal({ id, content, date: today });
+                journalCards.appendChild(journalCard);
+
+                // Save the journal as an object to localStorage
+                savedJournals.push({ id, content, date: today });
+                localStorage.setItem("journals", JSON.stringify(savedJournals));
+            }
+
+            function renderJournal({ id, content, date }) {
+                const journalCard = document.createElement("div");
+                journalCard.id = `journal-${id}`;
+                journalCard.className = "bg-white p-4 rounded-md shadow-xl";
+                journalCard.innerHTML = `
+                    <p class="text-lg">${content}</p>
+                    <p class="text-xs text-gray-500 font-light ">ID: ${id} | Date: ${date}</p>
+                    <div class="flex mt-2">
+                        <button class="text-blue mr-2 font-bold" onclick="editJournal(${id})">Edit</button>
+                        <button class="text-red font-bold" onclick="deleteJournal(${id})">Delete</button>
+                    </div>
+                `;
+                journalCards.appendChild(journalCard);
+                return journalCard;
+            }
+
+            function resetForm() {
+                journalContent.value = "";
+            }
+
+            window.editJournal = function (id) {
+                const journalCard = document.getElementById(`journal-${id}`);
+                const currentContent = journalCard.querySelector("p").innerText;
+                journalContent.value = currentContent;
+
+                // Delete the journal card
+                journalCard.remove();
+
+                // Open the modal for editing
+                journalModal.style.display = "block";
+                overlay.style.display = "block";
+            }
+
+            window.deleteJournal = function (id) {
+                const journalCard = document.getElementById(`journal-${id}`);
+
+                // Delete the journal card
+                journalCard.remove();
+
+                // Remove the journal from localStorage
+                const updatedJournals = savedJournals.filter(journal => journal.id !== id);
+                localStorage.setItem("journals", JSON.stringify(updatedJournals));
+            }
+        });
+    </script>
+
+</body>
+
+</html>

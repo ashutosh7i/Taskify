@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskify</title>
+
+  <link rel="stylesheet" crossorigin href="/assets/index-Jh90PN7K.css">
+</head>
+<body id="body" class="h-dvh w-full box-border bg-gray ">
+    <!-- Modal -->
+    <div id="quoteModal" class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-80 hidden">
+      <div class="bg-white p-8 rounded-lg" id="quoteModalContent">
+          <!-- Quote content will be inserted here -->
+      </div>
+  </div>
+
+    <div id="container" class="min-h-full flex flex-col  ">
+      <header class="h-14 p-2 border-b- border-border-color  flex justify-between items-center "> 
+         <div class="h-8 w-22">
+          <div class="">
+            <p id="nav-btn" class="h-8 w-10 pb-8 pt-2  rounded-full bg-logo-color  ">
+              <img src="/assets/upcoming-pwD5l4dV.png" class=" h-6 w-6   m-auto">
+            </p>
+        </div>
+          </div>
+          <div>
+              <img src="/assets/logo-Aka3aoro.jpg" class="h-10">
+          </div>
+          <div>
+              <button onclick="location.href = '/journel.html';" id="journal-btn" class="rounded-full pb-10 bg-logo-color hover:bg-blue-800 w-10 h-8 font-extrabold text-3xl ">+</button>
+         </div>
+    </header>
+    
+    <header class="h-10 p-2 border-b-2 border-border-color bg-border-color rounded-2xl m-2 shadow-md mb-4 ">
+         <div class="flex justify-between items-center ">
+            <div id="to-do-button" class="text-xl ml-3 font-extrabold ">To-do</div>
+            <div id="doing-button" class="text-xl font-extrabold">Doing</div>
+            <div id="done-button" class=" text-xl mr-3 font-extrabold "> Done</div>
+         </div>
+    </header>
+
+    <div id="todo" class="bg-blue-100 p-4 rounded-lg ">
+      <!-- make to do design here -->
+      <h2 id="todoCardSpace" class="text-2xl font-bold mb-4">To Do</h2>
+      
+      <!-- Todo's render here from db -->
+    </div>
+
+    <div id="doing" class="bg-yellow-100 p-4 rounded-lg">
+      <!-- make doing design here -->
+      <h2 id="doingCardSpace" class="text-2xl font-bold mb-4">Doing</h2>
+        <!-- Doing's render here from db -->
+    </div>
+
+    <div id="done" class="bg-green-100 p-4 rounded-lg">
+      <!-- make done design here -->
+      <h2 id="doneCardSpace" class="text-2xl font-bold mb-4">Done</h2>
+        <!-- Done's render here from db -->
+    </div>
+
+  </div>
+  <footer class="footer  h-12 p-2 bg-logo-color rounded-2xl text-center m-auto absolute ">
+    <button id="add-task" class="text-xl font-extrabold "> Add a Task <span class="text-2xl">+ </span></button>
+   
+  </footer>
+    
+</body>
+<script src="https://hammerjs.github.io/dist/hammer.js"></script>
+<script src="index.js"></script>
+</html>
