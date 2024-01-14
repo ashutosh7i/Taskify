@@ -80,61 +80,72 @@ function setCurrentSectionIndex(index) {
     currentSectionIndex = index;
 }
 
-//some static tasks
-var tasks = [
-    {
-        status: "todo",
-        taskId: 1,
-        title: "Complete Project Proposal",
-        description: "Draft and submit the project proposal for review.",
-        date: "2022-02-15",
-        priority: "red"
-    },
-    {
-        status: "doing",
-        taskId: 2,
-        title: "Prepare Presentation",
-        description: "Create a compelling presentation for the upcoming meeting.",
-        date: "2022-02-20",
-        priority: "white"
-    },
-    {
-        status: "todo",
-        taskId: 3,
-        title: "Review Code Changes",
-        description: "Review and provide feedback on recent code changes.",
-        date: "2022-02-25",
-        priority: "yellow"
-    },
-    {
-        status: "done",
-        taskId: 4,
-        title: "Meeting with Client",
-        description: "Conduct a virtual meeting with the client to discuss project updates.",
-        date: "2022-03-01",
-        priority: "red"
-    },
-    {
-        status: "doing",
-        taskId: 5,
-        title: "Debugging Session",
-        description: "Collaborate with the team to debug and fix reported issues.",
-        date: "2022-03-05",
-        priority: "white"
-    }
-];
+// //some static tasks
+// var tasks = [
+//     {
+//         status: "todo",
+//         taskId: 1,
+//         title: "Complete Project Proposal",
+//         description: "Draft and submit the project proposal for review.",
+//         date: "2022-02-15",
+//         priority: "red"
+//     },
+//     {
+//         status: "doing",
+//         taskId: 2,
+//         title: "Prepare Presentation",
+//         description: "Create a compelling presentation for the upcoming meeting.",
+//         date: "2022-02-20",
+//         priority: "white"
+//     },
+//     {
+//         status: "todo",
+//         taskId: 3,
+//         title: "Review Code Changes",
+//         description: "Review and provide feedback on recent code changes.",
+//         date: "2022-02-25",
+//         priority: "yellow"
+//     },
+//     {
+//         status: "done",
+//         taskId: 4,
+//         title: "Meeting with Client",
+//         description: "Conduct a virtual meeting with the client to discuss project updates.",
+//         date: "2022-03-01",
+//         priority: "red"
+//     },
+//     {
+//         status: "doing",
+//         taskId: 5,
+//         title: "Debugging Session",
+//         description: "Collaborate with the team to debug and fix reported issues.",
+//         date: "2022-03-05",
+//         priority: "white"
+//     }
+// ];
 
-// Display tasks in specific sections based on their status
-tasks.forEach(function(task) {
-    var taskCard = TaskCard(task);
-    if (task.status === "todo") {
-        todoCardSpace.innerHTML += taskCard;
-    } else if (task.status === "doing") {
-        doingCardSpace.innerHTML += taskCard;
-    } else if (task.status === "done") {
-        doneCardSpace.innerHTML += taskCard;
-    }
-});
+// Function to retrieve tasks from local storage
+function getTasksFromLocalStorage() {
+    const storedTasks = localStorage.getItem('tasks');
+    return storedTasks ? JSON.parse(storedTasks) : [];
+}
+
+// Display tasks from local storage in specific sections based on their status
+function displayTasksFromLocalStorage() {
+    const tasks = getTasksFromLocalStorage();
+
+    tasks.forEach(function(task) {
+        var taskCard = TaskCard(task);
+        if (task.status === "todo") {
+            todoCardSpace.innerHTML += taskCard;
+        } else if (task.status === "doing") {
+            doingCardSpace.innerHTML += taskCard;
+        } else if (task.status === "done") {
+            doneCardSpace.innerHTML += taskCard;
+        }
+    });
+}
+
 function TaskCard(data) {
     // Map priority values to custom background colors
     const priorityColors = {
@@ -151,8 +162,11 @@ function TaskCard(data) {
                 <span id="date" class=" ml-1 text-xs">${data.date}</span>
                 <span id="task-num" class="ml-48 font-bold">${data.taskId}</span>
                 <p>${data.description}</p>
+                <button onclick="deleteTask(${data.taskId})" class="text-white px-4 py-2 rounded-full">🗑️</button>
             </div>`;
 }
+
+displayTasksFromLocalStorage();
 
  // opening the form
  const footer = document.querySelector('.footer')
@@ -182,27 +196,139 @@ function TaskCard(data) {
     <label class="text-white font-bold">Priority:</label>
     <div class="flex justify-between">
         <div>
-            <input type="radio" id="no-priority" name="priority" value="no-priority">
+            <input type="radio" id="no-priority" name="priority" value="white">
             <label for="no-priority" class="text-white">No Priority</label>
         </div>
         <div>
-            <input type="radio" id="medium-priority" name="priority" value="medium-priority" checked>
+            <input type="radio" id="medium-priority" name="priority" value="yellow" checked>
             <label for="medium-priority" class="text-white">Medium Priority</label>
         </div>
         <div>
-            <input type="radio" id="high-priority" name="priority" value="high-priority">
+            <input type="radio" id="high-priority" name="priority" value="red">
             <label for="high-priority" class="text-white">High Priority</label>
         </div>
         </div>
     </div>
     <hr class="">
     <div class="flex justify-between">
-        <button type="button" id="discard-task" class="bg-red text-white px-4 py-2 rounded-full">Discard</button>
-        <button type="submit" id="save-task" class="bg-white text-blue px-4 py-2 rounded-full">Save</button>
+        <button onclick="discardForm()" type="button" id="discard-task" class="bg-red text-white px-4 py-2 rounded-full">Discard</button>
+        <button onclick="saveTask()" type="button" id="save-task" class="bg-white text-blue px-4 py-2 rounded-full">Save</button>
     </div>
 </form>
-`
-    
+<script>
+`    
 }
 
  taskButton.addEventListener('click' , openForm)
+
+
+
+
+ // Saving a new Task to db
+
+function saveTask() {
+    // Get values from the form
+    const title = document.getElementById("task-title").value;
+    const description = document.getElementById("task-description").value;
+    const date = document.getElementById("task-date").value;
+
+    // Get the selected priority
+    let priority;
+    const priorityRadios = document.getElementsByName("priority");
+    for (const radio of priorityRadios) {
+        if (radio.checked) {
+            priority = radio.value;
+            break;
+        }
+    }
+
+    // Create a new task object
+    const newTask = {
+        status: "todo",
+        title: title,
+        description: description,
+        date: date,
+        priority: priority
+    };
+
+    // Save the new task
+    const tasksAfterAdding = saveNewTask(newTask);
+    console.log('Tasks after adding:', tasksAfterAdding);
+
+    // Optionally, you can display the new task on the page immediately
+    const taskCard = TaskCard(newTask);
+    todoCardSpace.innerHTML += taskCard;
+
+    // Clear form data
+    clearFormData();
+
+    // Close the form
+    footer.classList.remove('expanded');
+}
+
+ // Function to save tasks to local storage
+function saveTasksToLocalStorage(tasks) {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+// Function to save a new task
+function saveNewTask(newTask) {
+    const tasks = getTasksFromLocalStorage();
+    newTask.taskId = tasks.length + 1;
+    tasks.push(newTask);
+    saveTasksToLocalStorage(tasks);
+    return tasks;
+}
+
+// // Function to update a specific task
+// function updateTask(updatedTask) {
+//     let tasks = getTasksFromLocalStorage();
+//     tasks = tasks.map(task => (task.taskId === updatedTask.taskId ? updatedTask : task));
+//     saveTasksToLocalStorage(tasks);
+//     return tasks;
+// }
+
+// Function to delete a task
+function deleteTask(taskId) {
+    let tasks = getTasksFromLocalStorage();
+    tasks = tasks.filter(task => task.taskId !== taskId);
+    saveTasksToLocalStorage(tasks);
+
+    //refresh the page to update 
+    location.reload();
+    return tasks;
+}
+
+// Function to clear form data
+function clearFormData() {
+    document.getElementById("task-title").value = "";
+    document.getElementById("task-description").value = "";
+    document.getElementById("task-date").value = "";
+
+    const priorityRadios = document.getElementsByName("priority");
+    for (const radio of priorityRadios) {
+        radio.checked = false;
+    }
+}
+
+// Function to handle discarding the form
+function discardForm() {
+    // Clear form data
+    clearFormData();
+
+    // Close the form
+    footer.classList.remove('expanded');
+}
+
+// // 4. Update a specific task
+// const taskToUpdate = {
+//     taskId: 1,
+//     status: "done",
+//     title: "Updated Task",
+//     description: "This task has been updated.",
+//     date: "2022-03-15",
+//     priority: "red"
+// };
+
+// const tasksAfterUpdating = updateTask(taskToUpdate);
+// console.log('Tasks after updating:', tasksAfterUpdating);
