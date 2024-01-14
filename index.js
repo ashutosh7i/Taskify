@@ -367,6 +367,9 @@ function discardForm() {
 // const tasksAfterUpdating = updateTask(taskToUpdate);
 // console.log('Tasks after updating:', tasksAfterUpdating);
 document.addEventListener("DOMContentLoaded", function () {
+     // Check if the quote has already been displayed
+     const quoteDisplayed = localStorage.getItem('quoteDisplayed');
+     if (!quoteDisplayed) {
     // Fetch quote from API
     fetch('https://type.fit/api/quotes')
         .then(response => response.json())
@@ -399,7 +402,10 @@ document.addEventListener("DOMContentLoaded", function () {
             // Hide the modal when clicking the hide button
             document.getElementById("hideModalBtn").addEventListener("click", function () {
                 document.getElementById("quoteModal").classList.add("hidden");
+                 // Set the flag in local storage to indicate that the quote has been displayed
+                 localStorage.setItem('quoteDisplayed', 'true');
             });
         })
         .catch(error => console.error('Error fetching quote:', error));
+    }
 });
